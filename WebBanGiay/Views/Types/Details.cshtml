@@ -1,0 +1,36 @@
+﻿@model WebBanGiay.Models.Type
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="jumbotron py-4 text-center">
+    <h1>Chi tiết loại sản phẩm</h1>
+</div>
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-6">
+        
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th style="width: 30%">Tên loại:</th>
+                    <td>@Html.DisplayFor(model => model.TypeName)</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <div class="text-center">
+            <img src="@Html.DisplayFor(model => model.TypeImage)" class="img-fluid" alt="Product Image">
+        </div>
+    </div>
+    </div>
+    <div class="mt-4 text-center">
+        <a asp-action="Edit" asp-route-id="@Model.TypeId" class="btn btn-primary">Chỉnh sửa</a>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+</div>

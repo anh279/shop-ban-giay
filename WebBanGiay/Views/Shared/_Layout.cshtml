@@ -1,0 +1,304 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Shop bán giày</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+    <!-- Favicon -->
+    <link href="/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+   
+
+    <!-- Libraries Stylesheet -->
+    <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="~/css/style.css" rel="stylesheet">
+    
+</head>
+@using Microsoft.AspNetCore.Identity
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row bg-dark py-2 px-xl-5">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-light" href="">FAQs</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-light" href="">Help</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-light" href="">Support</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-light px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-light px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-light px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-light px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-light pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-5 d-none d-lg-block">
+
+
+                @* <h1 class="m-0 display-5 font-weight-semi-bold"><a href="/" class="text-decoration-none text-home"><span class=" px-3 mr-1"><img class="logo" src="/img/logo.png" /></span>Shop bán giày</a></h1> *@
+                <h1 class="m-0 display-5 font-weight-semi-bold"><a href="/" class="text-decoration-none text-home"><span class="text-primary font-weight-bold border px-3 mr-1">N</span>SHOP</a></h1>
+
+            </div>
+            <div class="col-lg-4 col-6 text-left">
+                <form asp-action="Search" asp-controller="ProductsPage">
+                    <div class="input-group">
+                        <input type="text" name="keywords" value="@ViewBag.KeyWords" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                        <div class="input-group-append">
+                            <button type="submit" class=" input-group-text bg-transparent text-primary" style="outline:none;">
+                                <i class="fa fa-search"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3 col-6 text-right">
+                <a href="" class="btn border">
+                    <i class="fas fa-heart text-primary"></i>
+                    <span class="badge">0</span>
+                </a>
+                @await Component.InvokeAsync("CartWidget")
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+    <!-- Navbar Start -->
+    <div class="container-fluid mb-5">
+        <div class="row border-top px-xl-5">
+
+
+            @* @await Component.InvokeAsync("NavBar") *@
+
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-5 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">N</span>SHOP</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="/" class="nav-item nav-link active ">Trang chủ</a>
+                            <a href="/ProductsPage" class="nav-item nav-link ">Sản phẩm</a>     
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Mua hàng</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a href="/Cart" class="dropdown-item">Giỏ hàng</a>
+                                    <a href="/Cart/Checkout" class="dropdown-item">Thanh toán</a>
+                                </div>
+                            </div>
+                            <a href="/Contact" class="nav-item nav-link">Liên Hệ</a>
+                        </div>
+
+                        @await Component.InvokeAsync("UserInfo")
+
+
+                    </div>
+                </nav>
+                <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="height: 600px;">
+                            <img class="img-fluid" src="~/img/banner1.png" alt="Image">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">Giảm giá 10% cho đơn hàng đầu tiên</h4>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">Giầy thời trang</h3>
+                                    <a href="" class="btn btn-light py-2 px-3">Mua ngay</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" style="height: 600px;">
+                            <img class="img-fluid" src="~/img/banner2.jpg" alt="Image">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">Giảm giá 10% cho đơn hàng đầu tiên</h4>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">Giá cả hợp lý</h3>
+                                    <a href="" class="btn btn-light py-2 px-3">Mua ngay</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                        <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                            <span class="carousel-control-prev-icon mb-n2"></span>
+                        </div>
+                    </a>
+                    <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                        <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                            <span class="carousel-control-next-icon mb-n2"></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+    <!-- Featured Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
+                    <h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                    <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Featured End -->
+    @RenderBody()
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light mt-5 pt-5">
+        <div class="row px-xl-5 pt-5">
+            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+
+                @* <h3 class="mb-4 display-5 font-weight-semi-bold"><a href="" class="text-decoration-none"><span class=" px-3 mr-1"><img class="logo" src="/img/logo.png" /></span>Shop bán giày</a></h3> *@
+
+                <h3 class="m-0 display-5 font-weight-semi-bold mb-3 text-light"><span class="text-light font-weight-bold border px-3 mr-1" style="border: 1px solid #DDD !important">N</span>SHOP</h3>
+
+                <p>CÔNG TY TNHH SẢN XUẤT HÀNG TIÊU DÙNG BÌNH TIÊN</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-light mr-3"></i>235 Hoàng Quốc Việt, Bắc Từ Liêm, Cầu Giấy, Hà Nội</p>
+                <p class="mb-2"><i class="fa fa-envelope text-light mr-3"></i>chamsockhachhang@nike.com.vn</p>
+                <p class="mb-0"><i class="fa fa-phone-alt text-light mr-3"></i>+012 345 67890</p>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-light mb-4">Thông tin</h5>
+                        <div class="d-flex flex-column justify-content-start">
+
+                            <a class="text-light mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                            <a class="text-light mb-2" href="/Products"><i class="fa fa-angle-right mr-2"></i>Sản phẩm</a>
+                            <a class="text-light mb-2" href="/Cart"><i class="fa fa-angle-right mr-2"></i>Giỏ hàng</a>
+                            <a class="text-light mb-2" href="/Cart/Checkout"><i class="fa fa-angle-right mr-2"></i>Thanh toán</a>
+                            <a class="text-light" href="/Contact"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-light mb-4">Hỗ trợ</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-light mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Tuyển dụng</a>
+                            <a class="text-light mb-2" href="/Products"><i class="fa fa-angle-right mr-2"></i>Hệ thống cửa hàng</a>
+
+                            <a class="text-light mb-2" href="/Cart"><i class="fa fa-angle-right mr-2"></i>Liên hệ hợp tác</a>
+                            <a class="text-light mb-2" href="/Cart/Checkout"><i class="fa fa-angle-right mr-2"></i>Q&A</a>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-light mb-4">Bảng tin</h5>
+                        <form action="">
+                            <div class="form-group">
+                                <input type="email" class="form-control border-0 py-4" placeholder="Nhập email của bạn"
+                                       required="required" />
+                            </div>
+                            <div>
+                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">NHẬN ƯU ĐÃI NGAY</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border-top border-light mx-xl-5 py-4">
+            <div class="col-md-6 px-xl-0">
+                <p class="mb-md-0 text-center text-md-left text-light">
+                    &copy; Copyright 2023 Nike. Powered by Haravan Enterprise
+
+                </p>
+            </div>
+            <div class="col-md-6 px-xl-0 text-center text-md-right">
+                <img class="img-fluid" src="~/img/payments.png" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v19.0" nonce="OvoJ3bTx"></script>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/easing/easing.min.js"></script>
+    <script src="~/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="~/js/main.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".user-btn").click(function () {
+                $(".wrap-info").toggle(); // Toggle hiển thị/ẩn wrap-info khi nút được nhấn
+            });
+
+            var currentPath = window.location.pathname;
+            console.log("Path: " + currentPath);
+
+            $('#navbarCollapse .nav-item.nav-link').each(function () {
+                var href = $(this).attr('href');
+                if (currentPath.indexOf(href) !== -1) {
+                    $('#navbarCollapse .nav-item.nav-link').removeClass('active');
+                    $(this).addClass('active');
+                }
+                else if (currentPath.indexOf("/Cart") !== -1) {
+                    $('#navbarCollapse .nav-item.nav-link').removeClass('active');
+                }
+                
+            });
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

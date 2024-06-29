@@ -1,0 +1,41 @@
+﻿@model WebBanGiay.Models.Size
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="jumbotron py-4 text-center">
+    <h1>Tạo Kích Thước</h1>
+</div>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h4>Kích Thước</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="form-group">
+                        <label asp-for="SizeName" class="control-label">Tên Kích Thước</label>
+                        <input asp-for="SizeName" class="form-control" />
+                        <span asp-validation-for="SizeName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <input type="submit" value="Tạo" class="btn btn-primary" />
+                        <a asp-action="Index" class="btn btn-secondary ml-2">Quay Lại Danh Sách</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

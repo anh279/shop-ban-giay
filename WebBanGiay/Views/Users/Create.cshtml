@@ -1,0 +1,74 @@
+﻿@model WebBanGiay.Models.User
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="jumbotron py-4 text-center">
+    <h1>Tạo Người Dùng</h1>
+</div>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h4>Người Dùng</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="form-group">
+                        <label asp-for="UserName" class="control-label">Tên Đăng Nhập</label>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="UserPassword" class="control-label">Mật Khẩu</label>
+                        <input asp-for="UserPassword" class="form-control" />
+                        <span asp-validation-for="UserPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="UserFullName" class="control-label">Họ và Tên</label>
+                        <input asp-for="UserFullName" class="form-control" />
+                        <span asp-validation-for="UserFullName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="UserPhoneNumber" class="control-label">Số Điện Thoại</label>
+                        <input asp-for="UserPhoneNumber" class="form-control" />
+                        <span asp-validation-for="UserPhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="UserAddress" class="control-label">Địa Chỉ</label>
+                        <input asp-for="UserAddress" class="form-control" />
+                        <span asp-validation-for="UserAddress" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="UserRole" class="control-label">Vai Trò</label>
+                        <select asp-for="UserRole" class="form-control">
+                            <option value="admin">Quản Trị Viên</option>
+                            <option value="customer">Khách Hàng</option>
+                        </select>
+                        <span asp-validation-for="UserRole" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <input type="submit" value="Tạo" class="btn btn-primary" />
+                        <a asp-action="Index" class="btn btn-secondary ml-2">Quay Lại Danh Sách</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

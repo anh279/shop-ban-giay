@@ -1,0 +1,31 @@
+﻿@model WebBanGiay.Models.Size
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="jumbotron py-4 text-center">
+    <h1>Chi tiết kích cỡ</h1>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-4">
+
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th style="width: 30%">Tên loại:</th>
+                        <td>@Html.DisplayFor(model => model.SizeName)</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="mt-4 text-center">
+        <a asp-action="Edit" asp-route-id="@Model.SizeId" class="btn btn-primary">Chỉnh sửa</a>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+</div>

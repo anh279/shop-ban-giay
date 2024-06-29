@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+@if(User.Identity.IsAuthenticated)
+{
+    <h1>Đăng nhập rồi đấy đăng xuất tại <a href="/Account/Logout">Đây</a></h1>
+}
+else
+{
+    <p>Vui lòng đăng nhập tại <a href="/Account/Login">Đây</a></p>
+}
+

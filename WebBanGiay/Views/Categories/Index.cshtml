@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebBanGiay.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="jumbotron py-4 text-center">
+    <h1>Thể loại</h1>
+</div>
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col text-right">
+            <a asp-action="Create" class="btn btn-success btn-lg">
+                <!-- Sử dụng btn-lg để làm nút to hơn -->
+                <i class="fas fa-plus-circle mr-2"></i> <!-- Thêm biểu tượng 'plus' bằng Font Awesome và đặt khoảng cách bên phải (mr-2) -->
+                Tạo thể loại mới
+            </a>
+        </div>
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover" id="dataTable">
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Tên thể loại</th>
+                            <th scope="col">Hình ảnh thể loại</th>
+                            <th scope="col">Mã thể loại</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                                <td>
+                                    <img src="~/img/@Html.DisplayFor(modelItem => item.CategoryImage)" class="img-fluid" style="max-width: 50px; height: auto;">
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.CategoryOrder)</td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Edit" asp-route-id="@item.CategoryId" class="btn btn-primary btn-sm" title="Sửa">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.CategoryId" class="btn btn-info btn-sm" title="Chi tiết">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-danger btn-sm" title="Xóa" onclick="return confirm('Bạn có chắc chắn muốn xóa thể loại này?')">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

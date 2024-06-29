@@ -1,0 +1,44 @@
+﻿@model WebBanGiay.Models.User
+
+@{
+    ViewData["Title"] = "Xóa Tài Khoản";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="jumbotron py-4 text-center">
+        <h1 class="text-danger display-4">Xóa Tài Khoản</h1>
+        <p class="lead mb-4">Bạn có chắc chắn muốn xóa tài khoản này không?</p>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">Chi Tiết Tài Khoản</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Mật Khẩu")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.UserPassword)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Họ và Tên")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.UserFullName)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Số Điện Thoại")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.UserPhoneNumber)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Địa Chỉ")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.UserAddress)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Vai Trò")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.UserRole)</dd>
+            </dl>
+        </div>
+        <div class="card-footer">
+            <form asp-action="Delete" class="form-inline">
+                <input type="hidden" asp-for="UserName" />
+                <button type="submit" class="btn btn-danger mr-2">Xóa</button>
+                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+            </form>
+        </div>
+    </div>
+</div>

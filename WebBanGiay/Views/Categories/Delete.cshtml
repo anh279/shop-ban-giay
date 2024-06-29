@@ -1,0 +1,40 @@
+﻿@model WebBanGiay.Models.Category
+
+@{
+    ViewData["Title"] = "Xóa Thể Loại";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="jumbotron py-4 text-center">
+        <h1 class="text-danger display-4">Xóa Thể Loại</h1>
+        <p class="lead mb-4">Bạn có chắc chắn muốn xóa thể loại này không?</p>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">Chi Tiết Thể Loại</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Tên Thể Loại")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.CategoryName)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Ảnh Thể Loại")</dt>
+                <dd class="col-sm-9">
+                    <img src="~/img/@Html.DisplayFor(model => model.CategoryImage)" class="img-fluid" alt="Ảnh Thể Loại" style="max-width: 150px;">
+                </dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Thứ Tự Thể Loại")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.CategoryOrder)</dd>
+            </dl>
+        </div>
+        <div class="card-footer">
+            <form asp-action="Delete" class="form-inline">
+                <input type="hidden" asp-for="CategoryId" />
+                <button type="submit" class="btn btn-danger mr-2">Xóa</button>
+                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+            </form>
+        </div>
+    </div>
+</div>

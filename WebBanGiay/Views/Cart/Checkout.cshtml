@@ -1,0 +1,194 @@
+﻿
+    @{
+        ViewData["Title"] = "Checkout";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+         int shipping = 10000;
+    }
+    @using System.Web
+    @model Cart
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+
+        <form asp-action="Checkout" asp-controller="Cart" class="row g-3 w-100 px-xl-5">
+            <div class="col-lg-7">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Địa chỉ nhận hàng</h4>
+                    <div class="row">
+                            <div class="col-md-12 form-group form-check ml-3">
+                                <input class="form-check-input" name="GiongKhachHang" type="checkbox" id="GiongKhachHang" value="false">
+                                <label for="GiongKhachHang" class="form-check-label">Giống thông tin khách hàng?</label>
+                            </div>
+                            <div class="col-md-6 form-group delivery-info">
+                                <label for="NguoiNhanHang" class="form-label">Người nhận hàng</label>
+                                <input class="form-control" name="NguoiNhanHang" type="text" id="NguoiNhanHang" placeholder="Nhập tên người nhận hàng" >
+                            </div>
+
+                            <div class="col-md-6 form-group delivery-info">
+                                <label for="SoDienThoai" class="form-label">Số điện thoại</label>
+                                <input class="form-control" name="SoDienThoai" type="text" id="SoDienThoai" placeholder="Nhập số điện thoại" >
+                            </div>
+
+                            <div class="col-md-12 form-group delivery-info">
+                                <label for="DiaChiGiaoHang" class="form-label">Địa chỉ giao hàng</label>
+                                <input class="form-control" name="DiaChiGiaoHang" type="text" id="DiaChiGiaoHang" placeholder="Nhập địa chỉ giao hàng" >
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Hóa đơn thanh toán</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="font-weight-medium mb-3">Sản phẩm</h5>
+                    
+                        @if (Model?.Lines != null)
+                        {
+                            foreach (var line in Model?.Lines)
+                            {
+                                <div class="row justify-content-between">
+                                    <div class="col-2">
+                                        <p>X@(line.Quantity)</p>
+                                    </div>
+                                    <div class="col-5">
+                                        <p>@line.Product.ProductName</p>
+                                    </div>
+                                    <div class="col-5 text-right">
+                                    <p>@((Math.Round(line.Product.ProductPrice * (1 - line.Product.ProductDiscount) * line.Quantity)).ToString("000,0"))₫</p>
+                                    </div>
+                            </div>
+
+                        }
+                        
+                    }
+                        <hr class="mt-0">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Shipping</h6>
+                        <h6 class="font-weight-medium">@shipping.ToString("000,0")₫</h6>
+                        </div>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5 class="font-weight-bold">Total</h5>
+                            @if(Model?.Lines != null)
+                            {
+
+                            <h5 class="font-weight-bold">@(((Model?.ComputeTotalValue() ?? 0) + shipping).ToString("000,0"))₫</h5>
+                            <input type="hidden" value="@(Model?.ComputeTotalValue() + shipping) " name="TongTien" id="TongTien" />
+                            }
+                            else
+                            {
+                                <h5 class="font-weight-bold">0</h5>
+                            }
+
+                      
+                            </div>
+                    </div>
+                </div>
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Phương thức thanh toán</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="payment" value="COD" id="COD" required checked>
+                                <label class="custom-control-label" for="COD">COD</label>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" name="payment" value="banktransfer" id="banktransfer" required>
+                                <label class="custom-control-label" for="banktransfer">Chuyển khoản</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                            <input type="submit" name="paymentType" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" value="Thanh toán (COD)">
+                            <input type="submit" name="paymentType" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" value="Thanh toán VNPay">
+                            @* <div id="paypal-button-container" class="form-group mt-3 col-12" style="max-width:1000px;">
+                            </div>
+                            <input id="paypal-submit-button" type="submit" name="paymentType" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" value="Thanh toán PayPal"> *@
+                    </div>
+                </div>
+            </div>
+            </form>
+    </div>
+
+
+    <!-- Checkout End -->
+    @section Scripts {
+        <script src="https://www.paypal.com/sdk/js?client-id=@ViewBag.PaypalClientId"></script>
+        <script>
+            $(document).ready(function () {
+                $("#GiongKhachHang").change(function () {
+                    if ($(this).prop("checked")) {
+                        $(this).val(true);
+                        $(".delivery-info").addClass("d-none");
+                       // $(".delivery-info input").required = false;
+                    } else {
+                        $(this).val(false);
+                        $(".delivery-info").removeClass("d-none");
+
+                    }
+                });
+                // Ẩn nút "Thanh toán PayPal"
+                $("#paypal-submit-button").hide();
+
+                // Kích hoạt sự kiện click trên phần tử "paypal-button-container"
+                $("#paypal-button-container").click(function () {
+                    $("#paypal-submit-button").click();
+                });
+
+                $('input[type="radio"]').change(function () {
+                    var selectedValue = $(this).val();
+
+                    // Ẩn tất cả các nút thanh toán trước khi hiển thị lại
+                    $('input[name="paymentType"]').hide();
+
+                    // Hiển thị nút thanh toán tương ứng với nút radio được chọn
+                    if (selectedValue === 'COD') {
+                        $('input[value="Thanh toán (COD)"]').show();
+                    } else if (selectedValue === 'banktransfer') {
+                        $('input[value="Thanh toán VNPay"]').show();
+                    }
+                });
+
+                // Ban đầu ẩn tất cả các nút thanh toán ngoại trừ nút COD (vì đã được chọn mặc định)
+                $('input[name="paymentType"]').not('[value="Thanh toán (COD)"]').hide();
+            });
+            paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color: 'silver',
+                    tagline: 'false'
+                },
+                createOrder: (data, actions) => {
+                    return fetch("/Cart/create-paypal-order", {
+                        method: "post",
+                    }).then((response) => {
+                        if (!response.ok) {
+                            return response.json().then(error => { throw error; });
+                        }
+
+                        return response.json();
+                    }).then((order) => order.id)
+                        .catch(error => alert(error.message));
+                },
+                onApprove: (data, actions) => {
+                    return fetch(`/Cart/capture-paypal-order?orderId=${data.orderID}`, {
+                        method: "post",
+                    }).then((response) => {
+                        if (!response.ok) {
+                            return response.json().then(error => { throw error; });
+                        }
+
+                        //Đổi địa chỉ tới action thông báo thành công
+                        window.location.href = "/Cart/PaymentSuccess";
+                    }).catch(error => alert(error.message));
+                }
+            }).render('#paypal-button-container');
+        </script>
+    }
+

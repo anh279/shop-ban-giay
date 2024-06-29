@@ -1,0 +1,41 @@
+﻿@model WebBanGiay.Models.Size
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="jumbotron py-4 text-center">
+    <h1>Chỉnh sửa kích thước</h1>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SizeId" />
+
+            <div class="form-group">
+                <label asp-for="SizeName" class="control-label">Tên kích thước</label>
+                <input asp-for="SizeName" class="form-control" />
+                <span asp-validation-for="SizeName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Lưu</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

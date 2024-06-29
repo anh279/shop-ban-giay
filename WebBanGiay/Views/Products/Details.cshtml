@@ -1,0 +1,73 @@
+﻿@model WebBanGiay.Models.Product
+
+@{
+    ViewData["Title"] = "Product Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="jumbotron py-4 text-center">
+    <h1>Chi tiết sản phẩm</h1>
+
+</div>
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th style="width: 30%">Tên:</th>
+                        <td>@Html.DisplayFor(model => model.ProductName)</td>
+                    </tr>
+                    <tr>
+                        <th>Mô tả:</th>
+                        <td>@Html.DisplayFor(model => model.ProductDescription)</td>
+                    </tr>
+                    <tr>
+                        <th>Loại:</th>
+                        <td>@Html.DisplayFor(model => model.Category.CategoryName)</td>
+                    </tr>
+                    <tr>
+                        <th>Kiểu:</th>
+                        <td>@Html.DisplayFor(model => model.Type.TypeName)</td>
+                    </tr>
+                    <tr>
+                        <th>Giá:</th>
+                        <td>@(Model.ProductPrice.ToString("N0"))₫</td>
+                    </tr>
+                    <tr>
+                        <th>Giảm giá:</th>
+                        <td>@((float)Model.ProductDiscount * 100)%</td>
+                    </tr>
+                    <tr>
+                        <th>Kích cỡ:</th>
+                        <td>@Html.DisplayFor(model => model.Size.SizeName)</td>
+                    </tr>
+                    <tr>
+                        <th>Màu sắc:</th>
+                        <td>@Html.DisplayFor(model => model.Color.ColorName)</td>
+                    </tr>
+                    <tr>
+                        <th>Is Hot:</th>
+                        <td>@Html.DisplayFor(model => model.IsHot)</td>
+                    </tr>
+                    <tr>
+                        <th>Is New:</th>
+                        <td>@Html.DisplayFor(model => model.IsNew)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <div class="text-center">
+                <img src="~/img/@Html.DisplayFor(model => model.ProductImage)" class="img-fluid" alt="Product Image">
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-4 text-center">
+        <a asp-action="Edit" asp-route-id="@Model?.ProductId" class="btn btn-primary">Chỉnh sửa</a>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+</div>

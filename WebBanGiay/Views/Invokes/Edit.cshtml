@@ -1,0 +1,123 @@
+﻿@model WebBanGiay.Models.Invoke
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="jumbotron py-4 text-center">
+    <h1>Chỉnh sửa thông tin đơn hàng</h1>
+</div>
+<div class="row justify-content-center mb-4">
+    <div class="col-md-8">
+        <form asp-action="Edit" class="needs-validation" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="InvokeId" />
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="CustomerName" class="control-label">Tên khách hàng</label>
+                    <input asp-for="CustomerName" class="form-control" required />
+                    <div class="invalid-feedback">Vui lòng nhập tên khách hàng.</div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label asp-for="PhoneNumber" class="control-label">Số điện thoại</label>
+                    <input asp-for="PhoneNumber" class="form-control" required />
+                    <div class="invalid-feedback">Vui lòng nhập số điện thoại.</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label asp-for="Address" class="control-label">Địa chỉ</label>
+                    <input asp-for="Address" class="form-control" required />
+                    <div class="invalid-feedback">Vui lòng nhập địa chỉ.</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="OrderDate" class="control-label">Ngày đặt hàng</label>
+                    <input asp-for="OrderDate" class="form-control" type="date" required />
+                    <div class="invalid-feedback">Vui lòng chọn ngày đặt hàng.</div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label asp-for="DeliveryDate" class="control-label">Ngày giao hàng</label>
+                    <input asp-for="DeliveryDate" class="form-control" type="date" required />
+                    <div class="invalid-feedback">Vui lòng chọn ngày giao hàng.</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="DaysToDeliver" class="control-label">Số ngày giao hàng</label>
+                    <input asp-for="DaysToDeliver" class="form-control" required />
+                    <div class="invalid-feedback">Vui lòng nhập số ngày giao hàng.</div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label asp-for="InvokeTotalAmount" class="control-label">Tổng tiền đơn hàng</label>
+                    <input asp-for="InvokeTotalAmount" class="form-control" required />
+                    <div class="invalid-feedback">Vui lòng nhập tổng tiền đơn hàng.</div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label asp-for="ShippingFee" class="control-label">Phí vận chuyển</label>
+                    <input asp-for="ShippingFee" class="form-control" required />
+                    <div class="invalid-feedback">Vui lòng nhập phí vận chuyển.</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="ShippingMethod" class="control-label">Phương thức vận chuyển</label>
+                    <input asp-for="ShippingMethod" class="form-control" required />
+                    <div class="invalid-feedback">Vui lòng nhập phương thức vận chuyển.</div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label asp-for="PaymentMethod" class="control-label">Phương thức thanh toán</label>
+                    <input asp-for="PaymentMethod" class="form-control" required />
+                    <div class="invalid-feedback">Vui lòng nhập phương thức thanh toán.</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label asp-for="StatusId" class="control-label">Trạng thái</label>
+                    <select asp-for="StatusId" class="form-control" asp-items="ViewBag.StatusId" required>
+                        <option value="">Chọn trạng thái</option>
+                    </select>
+                    <div class="invalid-feedback">Vui lòng chọn trạng thái đơn hàng.</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label asp-for="Username" class="control-label">Người dùng</label>
+                    <select asp-for="Username" class="form-control" asp-items="ViewBag.Username" required>
+                        <option value="">Chọn người dùng</option>
+                    </select>
+                    <div class="invalid-feedback">Vui lòng chọn người dùng.</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Lưu</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

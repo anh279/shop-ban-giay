@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<WebBanGiay.Models.Category>
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3">
+        @foreach (var item in Model) {
+        <div class="col-lg-3 col-md-6 pb-1">
+            <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+                    <p class="text-right">@item.CategoryTotalProducts Sản phẩm</p>
+                    <a href="/ProductsPage/ProductsByCat?categoryId=@item.CategoryId" class="cat-img position-relative overflow-hidden mb-3">
+                    <img class="img-fluid" src="/img/@item.CategoryImage" alt="">
+                </a>
+                <h5 class="font-weight-semi-bold m-0 text-center">@item.CategoryName</h5>
+            </div>
+        </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,107 @@
+﻿@model WebBanGiay.Models.Product
+
+@{
+    ViewData["Title"] = "Chỉnh sửa sản phẩm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="jumbotron py-4 text-center">
+    <h1>Chỉnh sửa sản phẩm</h1>
+</div>
+<div class="container-fluid ">
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-6">
+            
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ProductId" />
+
+                <div class="form-group">
+                    <label asp-for="ProductName" class="control-label">Tên sản phẩm</label>
+                    <input asp-for="ProductName" class="form-control" />
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ProductDescription" class="control-label">Mô tả sản phẩm</label>
+                    <textarea asp-for="ProductDescription" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="ProductDescription" class="text-danger"></span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="CategoryId" class="control-label">Danh mục</label>
+                        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="TypeId" class="control-label">Loại sản phẩm</label>
+                        <select asp-for="TypeId" class="form-control" asp-items="ViewBag.TypeId"></select>
+                        <span asp-validation-for="TypeId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="ProductPrice" class="control-label">Giá sản phẩm</label>
+                        <input asp-for="ProductPrice" class="form-control" />
+                        <span asp-validation-for="ProductPrice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="ProductDiscount" class="control-label">Giảm giá (%)</label>
+                        <input asp-for="ProductDiscount" class="form-control" />
+                        <span asp-validation-for="ProductDiscount" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ProductImage" class="control-label">Hình ảnh sản phẩm</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="productImage" onchange="updateFileName(this)">
+                        <input asp-for="ProductImage" type="hidden" id="currentProductImage" value="@Model.ProductImage" required name="ProductImage" />
+                        <label class="custom-file-label" for="productImage" id="fileNameLabel">@Model.ProductImage</label>
+                    </div>
+                    <span asp-validation-for="ProductImage" class="text-danger"></span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="SizeId" class="control-label">Kích cỡ</label>
+                        <select asp-for="SizeId" class="form-control" asp-items="ViewBag.SizeId"></select>
+                        <span asp-validation-for="SizeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="ColorId" class="control-label">Màu sắc</label>
+                        <select asp-for="ColorId" class="form-control" asp-items="ViewBag.ColorId"></select>
+                        <span asp-validation-for="ColorId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="IsHot" />
+                    <label class="form-check-label" asp-for="IsHot">@Html.DisplayNameFor(model => model.IsHot)</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="IsNew" />
+                    <label class="form-check-label" asp-for="IsNew">@Html.DisplayNameFor(model => model.IsNew)</label>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

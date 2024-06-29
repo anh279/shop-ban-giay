@@ -1,0 +1,38 @@
+﻿@model WebBanGiay.Models.Category
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="jumbotron py-4 text-center">
+    <h1>Chi tiết thể loại</h1>
+</div>
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th style="width: 30%">Tên thể loại:</th>
+                        <td>@Html.DisplayFor(model => model.CategoryName)</td>
+                    </tr>
+                    <tr>
+                        <th>Thứ tự:</th>
+                        <td>@Html.DisplayFor(model => model.CategoryOrder)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <div class="text-center">
+                <img src="~/img/@Html.DisplayFor(model => model.CategoryImage)" class="img-fluid" alt="Category Image">
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-4 text-center">
+        <a asp-action="Edit" asp-route-id="@Model.CategoryId" class="btn btn-primary">Chỉnh sửa</a>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿@model WebBanGiay.Models.Product
+
+@{
+    ViewData["Title"] = "Xóa Sản Phẩm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="text-center jumbotron py-4">
+        <h1 class="text-danger display-4">Xóa Sản Phẩm</h1>
+        <p class="lead mb-4">Bạn có chắc chắn muốn xóa sản phẩm này không?</p>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">Chi Tiết Sản Phẩm</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Tên Sản Phẩm")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductName)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Mô Tả Sản Phẩm")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductDescription)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Thể loại")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Category.CategoryName)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Kiểu")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Type.TypeName)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Giá Sản Phẩm")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductPrice)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Giảm Giá")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductDiscount)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Ảnh Sản Phẩm")</dt>
+                <dd class="col-sm-9">
+                    <img src="~/img/@Html.DisplayFor(model => model.ProductImage)" class="img-fluid" alt="Ảnh Sản Phẩm" style="max-width: 150px;">
+                </dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Kích Cỡ")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Size.SizeName)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Màu Sắc")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Color.ColorName)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Hot")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.IsHot)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Mới")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.IsNew)</dd>
+            </dl>
+        </div>
+        <div class="card-footer">
+            <form asp-action="Delete" class="form-inline">
+                <input type="hidden" asp-for="ProductId" />
+                <button type="submit" class="btn btn-danger mr-2">Xóa</button>
+                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+            </form>
+        </div>
+    </div>
+</div>

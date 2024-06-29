@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<!-- Categories Start -->
+@await Component.InvokeAsync("CategoriesBar")
+<!-- Categories End -->
+<!-- Offer End -->
+<!-- Products Hot Start-->
+@await Component.InvokeAsync("Hot")
+<!-- Products End -->
+<!-- Subscribe Start -->
+<div class="container-fluid bg-secondary my-5">
+    <div class="row justify-content-md-center py-5 px-xl-5">
+        <div class="col-md-6 col-12 py-5">
+            <div class="text-center mb-2 pb-2">
+                <h2 class="section-title px-5 mb-3"><span class="bg-secondary px-2">Cập nhật thông tin sản phẩm</span></h2>
+                <p>Để lại thông tin email của bạn để cập nhật những thông báo mới nhất!</p>
+            </div>
+            <form action="">
+                <div class="input-group">
+                    <input type="text" class="form-control border-white p-4" placeholder="Nhập email tại đây">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary px-4">Đăng ký</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Subscribe End -->
+<!-- Products New Start -->
+@await Component.InvokeAsync("New")
+<!-- Products End -->
+<!-- Vendor Start -->
+<@* div class="container-fluid py-5">
+    <div class="row px-xl-5">
+        <div class="col">
+            <div class="owl-carousel vendor-carousel">
+                <div class="vendor-item border p-4">
+                    <img src="img/vendor-1.jpg" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="img/vendor-2.jpg" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="img/vendor-3.jpg" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="img/vendor-4.jpg" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="img/vendor-5.jpg" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="img/vendor-6.jpg" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="img/vendor-7.jpg" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="img/vendor-8.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div> *@
+<!-- Vendor End -->

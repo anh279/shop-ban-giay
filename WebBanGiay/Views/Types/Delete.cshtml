@@ -1,0 +1,37 @@
+﻿@model WebBanGiay.Models.Type
+
+@{
+    ViewData["Title"] = "Xóa Kiểu";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="jumbotron py-4 text-center">
+        <h1 class="text-danger display-4">Xóa Kiểu</h1>
+        <p class="lead mb-4">Bạn có chắc chắn muốn xóa kiểu này không?</p>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">Chi Tiết Kiểu</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Tên Kiểu")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.TypeName)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Ảnh Kiểu")</dt>
+                <dd class="col-sm-9">
+                    <img src="@Html.DisplayFor(model => model.TypeImage)" class="img-fluid" alt="Ảnh Kiểu" style="max-width: 150px;">
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer">
+            <form asp-action="Delete" class="form-inline">
+                <input type="hidden" asp-for="TypeId" />
+                <button type="submit" class="btn btn-danger mr-2">Xóa</button>
+                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+            </form>
+        </div>
+    </div>
+</div>

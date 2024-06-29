@@ -1,0 +1,65 @@
+﻿@model WebBanGiay.Models.Invoke
+
+@{
+    ViewData["Title"] = "Xóa Hóa Đơn";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="jumbotron py-4 text-center">
+        <h1 class="text-danger display-4">Xóa Hóa Đơn</h1>
+        <p class="lead mb-4">Bạn có chắc chắn muốn xóa hóa đơn này không?</p>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">Chi Tiết Hóa Đơn</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Tên Khách Hàng")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.CustomerName)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Địa Chỉ")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Address)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Số Điện Thoại")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.PhoneNumber)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Ngày Đặt Hàng")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.OrderDate)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Ngày Giao Hàng")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.DeliveryDate)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Số Ngày Giao Hàng")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.DaysToDeliver)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Tổng Số Tiền")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.InvokeTotalAmount)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Phương Thức Giao Hàng")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ShippingMethod)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Phương Thức Thanh Toán")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.PaymentMethod)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Phí Giao Hàng")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ShippingFee)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Trạng Thái")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Status.StatusName)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayName("Người Dùng")</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.User.UserName)</dd>
+            </dl>
+        </div>
+        <div class="card-footer">
+            <form asp-action="Delete" class="form-inline">
+                <input type="hidden" asp-for="InvokeId" />
+                <button type="submit" class="btn btn-danger mr-2">Xóa</button>
+                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+            </form>
+        </div>
+    </div>
+</div>

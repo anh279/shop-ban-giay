@@ -1,0 +1,65 @@
+﻿@model WebBanGiay.Models.Category
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="jumbotron py-4 text-center">
+    <h1>Chỉnh sửa danh mục</h1>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CategoryId" />
+
+            <div class="form-group">
+                <label asp-for="CategoryName" class="control-label">Tên danh mục</label>
+                <input asp-for="CategoryName" class="form-control" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Hình ảnh danh mục</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="categoryImage" onchange="updateFileName(this)" >
+                    <input asp-for="CategoryImage" type="hidden" id="currentProductImage" value="@Model.CategoryImage" required name="CategoryImage" />
+                    <label class="custom-file-label" for="categoryImage" id="fileNameLabel">@Model.CategoryImage</label>
+                    <span asp-validation-for="CategoryImage" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CategoryOrder" class="control-label">Thứ tự</label>
+                <input asp-for="CategoryOrder" class="form-control" />
+                <span asp-validation-for="CategoryOrder" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Lưu</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script>
+    // Update custom file input label with selected file name
+    function updateFileName(input) {
+        var fileName = input.files[0].name;
+        document.getElementById("fileNameLabel").innerText = fileName;
+    }
+</script>

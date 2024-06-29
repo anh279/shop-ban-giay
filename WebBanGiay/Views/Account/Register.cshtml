@@ -1,0 +1,125 @@
+﻿@model WebBanGiay.Models.User
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<title>Register</title>
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                
+                <div class="col-lg-12">
+                    <div class="p-5">
+                        <div class="text-center ">
+                            <h1 class="h2 text-gray-900 mb-4">Đăng ký</h1>
+                        </div>
+                        <form asp-action="Register" asp-controller="Account" class="user">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input asp-for="UserFullName" class="form-control form-control-user" type="text" placeholder="Họ và tên" required/>
+                                    <span  id="UserFullName-strength"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="UserName" class="form-control form-control-user" placeholder="Tài khoản" required />
+                                <span   id="user-strength"></span>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                 
+                                    <input asp-for="UserPassword" class="form-control form-control-user" id="UserPassword" type="password" placeholder="Mật khẩu" required />
+                                    <span   id="password-strength"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    
+                                    <input id="Password-Enter" class="form-control form-control-user" placeholder="Nhập lại mật khẩu" type="password" required />
+                                    <span id="password-mismatch-error" ></span>
+                                </div>
+                            </div>
+                            <div class="form-group" style="display: none;">
+                                <label asp-for="UserRole" class="control-label"></label>
+                                <input asp-for="UserRole" class="form-control" value="customer" />
+                                <span asp-validation-for="UserRole" ></span>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-info btn-user btn-block" id="submit-button">Đăng ký</button>
+                            
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" href="forgot-password.html">Quên mật khẩu?</a>
+                        </div>
+                        <div class="text-center">
+                            <p class="small">Bạn đã có tài khoản?<a href="/Account/Login"> Đăng nhập!</a></p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lắng nghe sự kiện khi người dùng thay đổi tên tài khoản, mật khẩu và xác nhận mật khẩu
+        document.getElementById("UserName").addEventListener("input", validateForm);
+        document.getElementById("UserPassword").addEventListener("input", validateForm);
+        document.getElementById("Password-Enter").addEventListener("input", validateForm);
+        document.getElementById("UserFullName").addEventListener("input", validateForm);
+    });
+
+    function validateForm() {
+        var username = document.getElementById("UserName").value;
+        var password = document.getElementById("UserPassword").value;
+        var confirmPassword = document.getElementById("Password-Enter").value;
+        var fullName = document.getElementById("UserFullName").value;
+
+        var userStrength = document.getElementById("user-strength");
+        var passwordStrength = document.getElementById("password-strength");
+        var errorSpan = document.getElementById("password-mismatch-error");
+        var fullNameStrength = document.getElementById("UserFullName-strength");
+
+        var submitButton = document.getElementById("submit-button");
+
+        // Kiểm tra độ dài tên tài khoản
+        var isUsernameValid = username.length >= 6;
+        userStrength.innerText = isUsernameValid ? "Tên tài khoản hợp lệ" : "Tên tài khoản phải có ít nhất 6 ký tự";
+        userStrength.style.color = isUsernameValid ? "green" : "red";
+
+        // Kiểm tra độ mạnh của mật khẩu
+        var isStrongPassword = validatePasswordStrength(password);
+        passwordStrength.innerText = isStrongPassword ? "Mật khẩu mạnh" : "Mật khẩu yếu. Cần ít nhất 8 ký tự, 1 chữ hoa, 1 số, và 1 ký tự đặc biệt.";
+        passwordStrength.style.color = isStrongPassword ? "green" : "red";
+
+        // Kiểm tra họ và tên
+        var isFullNameValid = fullName.trim() !== "";
+        fullNameStrength.innerText = isFullNameValid ? "Họ và tên hợp lệ" : "Họ và tên không được trống";
+        fullNameStrength.style.color = isFullNameValid ? "green" : "red";
+
+        // Kiểm tra xác nhận mật khẩu
+        if (password !== confirmPassword && confirmPassword !== "") {
+            errorSpan.innerText = "Mật khẩu và xác nhận mật khẩu không khớp.";
+            errorSpan.style.color = "red";
+            submitButton.disabled = true;
+        } else {
+            errorSpan.innerText = "";
+            submitButton.disabled = false;
+        }
+    }
+
+    function validatePasswordStrength(password) {
+        // Logic kiểm tra độ mạnh của mật khẩu
+        var lengthValid = password.length >= 8;
+        var hasUpperCase = /[A-Z]/.test(password);
+        var hasNumber = /[0-9]/.test(password);
+        var hasSpecialChar = /[!@@#$%^&*]/.test(password);
+
+        return lengthValid && hasUpperCase && hasNumber && hasSpecialChar;
+    }
+</script>

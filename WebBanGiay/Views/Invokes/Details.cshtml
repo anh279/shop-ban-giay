@@ -1,0 +1,74 @@
+﻿@model WebBanGiay.Models.Invoke
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="jumbotron py-4 text-center">
+    <h1>Chi tiết hóa đơn</h1>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th class="col-sm-4">Khách hàng:</th>
+                        <td class="col-sm-8">@Html.DisplayFor(model => model.CustomerName)</td>
+                    </tr>
+                    <tr>
+                        <th>Địa chỉ:</th>
+                        <td>@Html.DisplayFor(model => model.Address)</td>
+                    </tr>
+                    <tr>
+                        <th>Số điện thoại:</th>
+                        <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
+                    </tr>
+                    <tr>
+                        <th>Ngày đặt hàng:</th>
+                        <td>@Html.DisplayFor(model => model.OrderDate)</td>
+                    </tr>
+                    <tr>
+                        <th>Ngày giao hàng:</th>
+                        <td>@Html.DisplayFor(model => model.DeliveryDate)</td>
+                    </tr>
+                    <tr>
+                        <th>Số ngày giao hàng:</th>
+                        <td>@Html.DisplayFor(model => model.DaysToDeliver)</td>
+                    </tr>
+                    <tr>
+                        <th>Tổng số tiền:</th>
+                        <td>@Html.DisplayFor(model => model.InvokeTotalAmount)</td>
+                    </tr>
+                    <tr>
+                        <th>Phương thức vận chuyển:</th>
+                        <td>@Html.DisplayFor(model => model.ShippingMethod)</td>
+                    </tr>
+                    <tr>
+                        <th>Phương thức thanh toán:</th>
+                        <td>@Html.DisplayFor(model => model.PaymentMethod)</td>
+                    </tr>
+                    <tr>
+                        <th>Phí vận chuyển:</th>
+                        <td>@Html.DisplayFor(model => model.ShippingFee)</td>
+                    </tr>
+                    <tr>
+                        <th>Trạng thái:</th>
+                        <td>@Html.DisplayFor(model => model.Status.StatusName)</td>
+                    </tr>
+                    <tr>
+                        <th>Người dùng:</th>
+                        <td>@Html.DisplayFor(model => model.User.UserName)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mb-4 text-center">
+        <a asp-action="Edit" asp-route-id="@Model?.InvokeId" class="btn btn-primary">Chỉnh sửa</a>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+</div>
